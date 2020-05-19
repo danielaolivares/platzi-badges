@@ -11,12 +11,13 @@ import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './global.css';
+import App from './components/App';
 
 // import BadgeNew from './pages/BadgeNew';
-import Badges from './pages/Badges';
+//
 
 
 const container = document.getElementById('app');
 
 // ReactDOM.render(__qué quiero mostrar__, __dónde_quiero mostrar_);
-ReactDOM.render(<Badges />, container);
+ReactDOM.render(<App/>, container);

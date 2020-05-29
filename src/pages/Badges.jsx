@@ -7,41 +7,90 @@ import BadgesList from '../components/BadgesList';
 
 class Bagdes extends React.Component {
 
-  state={
-    data: [
-      {
-        id: '2de30c42-9deb-40fc-a41f-05e62b5939a7',
-        firstName: 'Freda',
-        lastName: 'Grady',
-        email: 'Leann_Berge@gmail.com',
-        jobTitle: 'Legacy Brand Director',
-        twitter: 'FredaGrady22221-7573',
-        avatarUrl:
-          'https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon',
-      },
-      {
-        id: 'd00d3614-101a-44ca-b6c2-0be075aeed3d',
-        firstName: 'Major',
-        lastName: 'Rodriguez',
-        email: 'Ilene66@hotmail.com',
-        jobTitle: 'Human Research Architect',
-        twitter: 'MajorRodriguez61545',
-        avatarUrl:
-          'https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon',
-      },
-      {
-        id: '63c03386-33a2-4512-9ac1-354ad7bec5e9',
-        firstName: 'Daphney',
-        lastName: 'Torphy',
-        email: 'Ron61@hotmail.com',
-        jobTitle: 'National Markets Officer',
-        twitter: 'DaphneyTorphy96105',
-        avatarUrl:
-          'https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon',
-      }
-    ]
+  
+
+  //comenzamos a agregar los metodos de montaje, el orden en los que ocurren estan escritos en consolelog
+
+  //en el constructor recibe props estos mismos props nosotros lo usamos para inicializarla super clase con estos mismos props
+  constructor(props) {
+    super(props);
+    console.log('1.constructor()');
+    // aqui inicializamos el estado, pero ya no solo es state, ahora sera this.state
+
+   this.state={
+      data: [],
+    };
   }
+
+  //simulare una peticion a una api, inicializare el estado donde data esta vacio, y aqui al simular la peticion en componentDidMount obtendre resultado en algun momento, en este caso en 3 seg llamara la funcion que mostrara la data
+  componentDidMount() {
+    console.log('3.componentDidMount()');
+    
+    this.timeoutId = setTimeout(()=>{
+      
+      this.setState({
+        data: [
+          {
+            id: '2de30c42-9deb-40fc-a41f-05e62b5939a7',
+            firstName: 'Freda',
+            lastName: 'Grady',
+            email: 'Leann_Berge@gmail.com',
+            jobTitle: 'Legacy Brand Director',
+            twitter: 'FredaGrady22221-7573',
+            avatarUrl:
+              'https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon',
+          },
+          {
+            id: 'd00d3614-101a-44ca-b6c2-0be075aeed3d',
+            firstName: 'Major',
+            lastName: 'Rodriguez',
+            email: 'Ilene66@hotmail.com',
+            jobTitle: 'Human Research Architect',
+            twitter: 'MajorRodriguez61545',
+            avatarUrl:
+              'https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon',
+          },
+          {
+            id: '63c03386-33a2-4512-9ac1-354ad7bec5e9',
+            firstName: 'Daphney',
+            lastName: 'Torphy',
+            email: 'Ron61@hotmail.com',
+            jobTitle: 'National Markets Officer',
+            twitter: 'DaphneyTorphy96105',
+            avatarUrl:
+              'https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon',
+          }
+        ]
+      })
+    },3000);
+  }
+
+  // componentDidUpdate recibe dos argumento los props que teniamos antes y el state que teniamos antes
+  componentDidUpdate(prevProps,prevState) {
+    console.log('5. componentDidUpdate()');
+
+    // impromire los valores que tenia antres
+    console.log({
+      prevProps: prevProps,
+      prevState: prevState,
+    });
+
+    // y los compararemos con los props y state que tenemos ahora , para comparar
+    console.log({
+      props: this.props,
+      state: this.state,
+    });
+  }
+
+// ultimo metodo es el momento antes de que salga del Dom
+
+componentWillUnmount(){
+  console.log('6. componentWillUnmount');
+
+  clearTimeout(this.timeoutId);
+}
   render() {
+    console.log('2/4.render()');
     return (
       <React.Fragment>
         <div className="Badges">

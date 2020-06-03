@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 import './styles/BadgesList.css';
 import twitter from '../images/social-media.svg'
@@ -6,6 +7,14 @@ import twitter from '../images/social-media.svg'
 
 class BadgesList extends React.Component{
   render() {
+    if (this.props.badges.length === 0) {
+      return (
+        <div>
+          <h3>No badge were found</h3>
+          <Link className="btn btn-primary" to="/badges/new"> Create new badge</Link>
+        </div>
+      )
+    }
     return(
       <ul className="list-unstyled BadgeList">
         {/* ya no viene de state , {this.state.dat.map((badge) => {,  si no que de props. badges */}

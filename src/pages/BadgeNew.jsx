@@ -73,7 +73,8 @@ handleSubmit = async e => {
               <BadgeForm 
               onChange={this.handleChange} 
               onSubmit={this.handleSubmit}
-              formValues ={this.state.form} />
+              formValues ={this.state.form} 
+              error={this.state.error}/>
             </div>
           </div>
         </div>

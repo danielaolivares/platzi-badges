@@ -5,10 +5,14 @@ import './styles/BadgeNew.css';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BagdeForm';
 import api from '../api';
+import PageLoading from '../components/PageLoading';
 
 // inicializamos un estado aqui, para que cambie la informacion de badgeform, y no solo este en bagdeform si no que podamos cambiarla a nivel de pa pagina.
 class BadgeNew extends React.Component {
-  state = { form: {
+  state = { 
+    loading: false,
+    error: null,
+    form: {
     // para que no nos salga el warning se inicializan los valores del formulario con string vacios.
     firstName: '',
     lastName: '',
@@ -43,6 +47,9 @@ handleSubmit = async e => {
 // el metodo handlechange ya no queremos que este en badgeform, si no que pertenezca a badgenew y para eso lo pasamos como uns props a a la etiqueta de badgeform
 
   render (){
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">

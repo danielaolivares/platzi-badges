@@ -8,18 +8,18 @@ class BadgeForm extends React.Component {
     console.log("hizo click");
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log('Form was submitted');
-    // console.log(this.state);
-  };
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log('Form was submitted');
+  //   // console.log(this.state);
+  // };
 
 
   render () {
     return(
       <div>
         <h1>New Attendant</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.onSubmit}>
           {/* para que el input sea controlado, que no guarde doblemente los datos se le pone value ={this.state.name} para que lo lea del estado  */}
           <div className="form-group">
             <label >First Name</label>

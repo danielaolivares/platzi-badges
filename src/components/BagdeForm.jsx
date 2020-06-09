@@ -18,7 +18,6 @@ class BadgeForm extends React.Component {
   render () {
     return(
       <div>
-        <h1>New Attendant</h1>
         <form onSubmit={this.props.onSubmit}>
           {/* para que el input sea controlado, que no guarde doblemente los datos se le pone value ={this.state.name} para que lo lea del estado  */}
           <div className="form-group">
@@ -49,7 +48,7 @@ class BadgeForm extends React.Component {
           <div className="form-group">
             <label >Twitter</label>
             <input onChange={this.props.onChange} className="form-control" type="text" name="twitter"
-            value={this.props.formValues.title} />
+            value={this.props.formValues.twitter} />
           </div>
 
           

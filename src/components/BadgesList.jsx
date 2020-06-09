@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 import './styles/BadgesList.css';
 import twitter from '../images/social-media.svg'
+import Gravatar from './Gravatar';
 
 
 class BadgesList extends React.Component{
@@ -22,6 +23,7 @@ class BadgesList extends React.Component{
           return (
             
             <li className="BadgesListItem" key={badge.id}>
+              <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
               <img src={badge.avatarUrl} alt="logo"className="BadgesListItem__avatar" /> 
               <div >
                 <div> <strong>{badge.firstName} {badge.lastName} </strong></div>
@@ -29,6 +31,7 @@ class BadgesList extends React.Component{
               <div className="Twitter__name">
                 <img src={twitter} alt="img logo" className="Twitter__logo"/>@{badge.twitter}</div>           
               </div>
+              </Link>
             </li>
           
           );

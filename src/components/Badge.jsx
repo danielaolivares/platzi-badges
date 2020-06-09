@@ -6,7 +6,7 @@ import Gravatar from './Gravatar';
 
 class Badge extends React.Component{
   render() {
-    const {firstName, lastName, jobTitle, twitter, avatarUrl} = this.props ;
+    const {firstName, lastName, jobTitle, twitter, avatarUrl,email} = this.props ;
     return (
       <div className="Badge">
         <div className="Badge__header">
@@ -16,7 +16,7 @@ class Badge extends React.Component{
         <div className="Badge__section-name">
           <Gravatar
           className="Badge__avatar"
-           email= {this.props.email} alt="Avatar"
+           email= {email} alt="Avatar"
            />
     <h1>
       {firstName}<br/>{lastName}

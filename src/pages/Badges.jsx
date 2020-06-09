@@ -8,6 +8,7 @@ import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
 
 import api from '../api'
+import MiniLoader from '../components/MiniLoader';
 
 class Bagdes extends React.Component {
 
@@ -30,8 +31,8 @@ class Bagdes extends React.Component {
   componentDidMount() {
     console.log('3.componentDidMount()');
 
-    this.fetchData();
-    
+    this.fetchData();    
+    this.intervalId = setInterval(this.fetchData, 5000);
     // this.timeoutId = setTimeout(()=>{
       
     //   this.setState({
@@ -74,13 +75,13 @@ class Bagdes extends React.Component {
 
 componentWillUnmount(){
   console.log('6. componentWillUnmount');
-
-  clearTimeout(this.timeoutId);
+  clearInterval(this.intervalId);
+  // clearTimeout(this.timeoutId);
 }
   render() {
     console.log('2/4.render()');
 
-    if (this.state.loading === true) {
+    if (this.state.loading === true && !this.state.data) {
       return <PageLoading />;
     }
 
@@ -110,6 +111,7 @@ componentWillUnmount(){
     </Link>
   </div>
     <BadgesList badges={this.state.data} />
+    {this.state.loading && <MiniLoader/>}
     {/* <ul className="list-unstyled">
      
      por cada uno de los elementos que tenga data quiero convertirlos de un objeto a un elemento, con una funcion sobre los arreglos , que es map, esta recibe una funcion como argumento y tiene que regresar otro valor en estes caso de un objeto a un elemento, por cada uno de los datos, nos va a dar un badge y este badge lo queremos regresar como un elemento lista y ahi anotamos lo que queremos que nos devuelva en estes caso nombre, apellido etc

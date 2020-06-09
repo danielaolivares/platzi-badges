@@ -1,16 +1,16 @@
 import React from 'react';
 
 import header from '../images/platziconf-logo.svg';
-import './styles/BadgeNew.css';
+import './styles/BadgeEdit.css';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BagdeForm';
 import api from '../api';
 import PageLoading from '../components/PageLoading';
 
 // inicializamos un estado aqui, para que cambie la informacion de badgeform, y no solo este en bagdeform si no que podamos cambiarla a nivel de pa pagina.
-class BadgeNew extends React.Component {
+class BadgeEdit extends React.Component {
   state = { 
-    loading: false,
+    loading: true,
     error: null,
     form: {
     // para que no nos salga el warning se inicializan los valores del formulario con string vacios.
@@ -19,7 +19,26 @@ class BadgeNew extends React.Component {
     jobTitle: '',
     email: '',
     twitter: '',
-  } };
+  },
+ };
+
+ componentDidMount() {
+   this.fetchData()
+ }
+
+ fetchData = async e => {
+   this.setState({ loading: true, error: null })
+
+   try {
+     const data= await api.badges.read(
+       this.props.match.params.badgeId
+     )
+
+     this.setState({loading: false, form:data});
+   } catch (error) {
+     this.setState({ loading: false, error:error})
+   };
+ };
 
 //  creamos un metodo que se llama handleChange donde recibe el evento y cuando lo reciba va a hacer un setState, pero va a decir setstate le pasamos un objeto y queremos que el form tenga la informacion del evento con nombre y valor
 handleChange = e => {
@@ -37,7 +56,7 @@ handleSubmit = async e => {
   this.setState({ loading: true, error: null })
 
   try {
-    await api.badges.create (this.state.form)
+    await api.badges.update(this.props.match.params.badgeId, this.state.form)
     this.setState({ loading: false })
     
     this.props.history.push('/badges');
@@ -54,8 +73,8 @@ handleSubmit = async e => {
     }
     return (
       <React.Fragment>
-        <div className="BadgeNew__hero">
-          <img className="BadgeNew__hero-image img-fluid" src={header} alt="Logo"/>
+        <div className="BadgeEdit__hero">
+          <img className="BadgeEdit__hero-image img-fluid" src={header} alt="Logo"/>
         </div>
 
         <div className="container">
@@ -71,8 +90,8 @@ handleSubmit = async e => {
               avatarUrl=" https://s.gravatar.com/avatar/222aed108f0bf7f7d3e7eae06ff693f6?s=80"/>
             </div>
             <div className="col-6">
-              <h1>New Attendant</h1>
               {/* aqui se pasa como proprs el handlechange y pasamos los valores del formulario desde badgenew a badgeform a traves de un proprs que es formValues  */}
+              <h1> Edit Attendant</h1>
               <BadgeForm 
               onChange={this.handleChange} 
               onSubmit={this.handleSubmit}
@@ -86,4 +105,4 @@ handleSubmit = async e => {
   }
 }
 
-export default BadgeNew;
+export default BadgeEdit;

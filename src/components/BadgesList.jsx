@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 import './styles/BadgesList.css';
 import twitter from '../images/social-media.svg'
-import Gravatar from './Gravatar';
 
 
 class BadgesList extends React.Component{
